@@ -5,7 +5,7 @@
     "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
   },
   "deploy": {
-    "startCommand": "gunicorn project.wsgi:application --bind 0.0.0.0:$PORT",
+    "startCommand": "python manage.py migrate && gunicorn project.wsgi:application --bind 0.0.0.0:$PORT",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRestartCount": 10
   }
