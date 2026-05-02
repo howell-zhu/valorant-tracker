@@ -1,0 +1,50 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Match List{% endblock %}
+
+{% block content %}
+    <h2>All Matches</h2>
+    <a href="{% url 'add_match' %}">+ Add New Match</a>
+    <br><br>
+
+    <form method="GET">
+        <label>Date: {{ filter_form.date }}</label>
+        <label>Map: {{ filter_form.map }}</label>
+        <button type="submit">Filter</button>
+        <a href="{% url 'match_list' %}">Clear</a>
+    </form>
+
+    <br>
+    {% if matches %}
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Map</th>
+                    <th>Score</th>
+                    <th>Avg Lobby Rank</th>
+                    <th>Duration (mins)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for match in matches %}
+                <tr>
+                    <td>{{ match.date }}</td>
+                    <td>{{ match.map }}</td>
+                    <td>{{ match.team_a_score }} - {{ match.team_b_score }}</td>
+                    <td>{{ match.avg_lobby_rank }}</td>
+                    <td>{{ match.duration_minutes }}</td>
+                    <td>
+                        <a href="{% url 'match_detail' match.id %}">Details</a> |
+                        <a href="{% url 'edit_match' match.id %}">Edit</a> |
+                        <a href="{% url 'delete_match' match.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No matches found.</p>
+    {% endif %}
+{% endblock %}

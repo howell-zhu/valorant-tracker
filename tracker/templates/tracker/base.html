@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Valorant Tracker{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'match_list' %}">All Matches</a> |
+        <a href="{% url 'add_match' %}">Add Match</a>
+    </nav>
+    <hr>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Add Match{% endblock %}
+
+{% block content %}
+    <h2>Add Match</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <h3>Match Details</h3>
+        {{ match_form.as_p }}
+
+        <h3>Player Entries</h3>
+        {{ entry_formset.management_form }}
+        <table border="1" cellpadding="8">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Agent</th>
+                    <th>Team</th>
+                    <th>Rank at Match</th>
+                    <th>Kills</th>
+                    <th>Deaths</th>
+                    <th>Assists</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry_form in entry_formset %}
+                <tr>
+                    <td>{{ entry_form.player }}</td>
+                    <td>{{ entry_form.agent }}</td>
+                    <td>{{ entry_form.team }}</td>
+                    <td>{{ entry_form.rank_at_match }}</td>
+                    <td>{{ entry_form.kills }}</td>
+                    <td>{{ entry_form.deaths }}</td>
+                    <td>{{ entry_form.assists }}</td>
+                    <td>{{ entry_form.id }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br>
+        <button type="submit">Save Match</button>
+        <a href="{% url 'match_list' %}">Cancel</a>
+    </form>
+{% endblock %}

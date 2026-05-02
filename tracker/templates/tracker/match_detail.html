@@ -1,0 +1,76 @@
+{% extends 'tracker/base.html' %}
+
+{% block title %}Match Detail{% endblock %}
+
+{% block content %}
+    <h2>Match Detail</h2>
+
+    <ul>
+        <li><strong>Date:</strong> {{ match.date }}</li>
+        <li><strong>Map:</strong> {{ match.map }}</li>
+        <li><strong>Score:</strong> {{ match.team_a_score }} - {{ match.team_b_score }}</li>
+        <li><strong>Duration:</strong> {{ match.duration_minutes }} minutes</li>
+        <li><strong>Avg Lobby Rank:</strong> {{ match.avg_lobby_rank }}</li>
+    </ul>
+
+    <h3>Team A</h3>
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Agent</th>
+                <th>Rank at Match</th>
+                <th>Kills</th>
+                <th>Deaths</th>
+                <th>Assists</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in team_a_entries %}
+            <tr>
+                <td>{{ entry.player }}</td>
+                <td>{{ entry.agent }}</td>
+                <td>{{ entry.rank_at_match }}</td>
+                <td>{{ entry.kills }}</td>
+                <td>{{ entry.deaths }}</td>
+                <td>{{ entry.assists }}</td>
+                <td>{% if entry.won %}Win{% else %}Loss{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Team B</h3>
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Agent</th>
+                <th>Rank at Match</th>
+                <th>Kills</th>
+                <th>Deaths</th>
+                <th>Assists</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in team_b_entries %}
+            <tr>
+                <td>{{ entry.player }}</td>
+                <td>{{ entry.agent }}</td>
+                <td>{{ entry.rank_at_match }}</td>
+                <td>{{ entry.kills }}</td>
+                <td>{{ entry.deaths }}</td>
+                <td>{{ entry.assists }}</td>
+                <td>{% if entry.won %}Win{% else %}Loss{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'edit_match' match.id %}">Edit Match</a> |
+    <a href="{% url 'delete_match' match.id %}">Delete Match</a> |
+    <a href="{% url 'match_list' %}">Back to All Matches</a>
+{% endblock %}
