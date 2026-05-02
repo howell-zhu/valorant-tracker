@@ -42,9 +42,6 @@ def add_match(request):
 
 @transaction.atomic
 def edit_match(request, match_id):
-    with connection.cursor() as cursor:
-        cursor.execute("SET TRANSACTION ISOLATION LEVEL REPEATABLE READ")
-
     match = get_object_or_404(Match, id=match_id)
 
     if request.method == 'POST':
