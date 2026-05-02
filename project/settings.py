@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-52825=6g2l(2jy7f!lcwtzli
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1', '.railway.app'])
 
 
 # Application definition
